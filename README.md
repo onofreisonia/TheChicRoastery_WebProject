@@ -6,51 +6,116 @@
 
 ---
 
-## Descriere Generala si Ideea Principala
+## 1. Descriere Generala si Ideea Principala
 
-The Chic Roastery este o platforma web de tip Single Page Application care transpune complexitatea operationala a unui lant modern de cafenele de specialitate intr-un ecosistem digital complet. Aplicatia imbina doua directii principale: gestionarea unei retele de cafenele fizice (cu locatii, rezervari si meniu digital) si un Marketplace online sustinut de o retea de vendori externi, totul intr-o interfata unitara, moderna si responsiva.
+The Chic Roastery este o platforma web de tip Single Page Application care transpune complexitatea operationala a unui lant modern de cafenele de specialitate intr-un ecosistem digital complet.
 
----
+Aplicatia imbina doua directii principale:
+- O retea de cafenele fizice cu locatii, rezervari interactive si meniu digital.
+- Un Marketplace online sustinut de o retea de vendori externi, cu cos de cumparaturi, checkout complet si gestiune de stoc dinamica.
 
-## Functionalitati Implementate (Sumar)
-
-1. **Autentificare si Gestionare Cont** - Sistem complet de Inregistrare, Autentificare si Editare Profil. Rolul utilizatorului este determinat automat dupa email. Starea de autentificare este persistata in localStorage.
-2. **Sistem de Roluri (4 niveluri)** - Guest (vizitator neautentificat), Client (utilizator inregistrat cu dashboard personal, puncte de loialitate si istoric), Vendor (furnizor cu panou propriu de gestionare inventar si comenzi) si Administrator (control total asupra platformei).
-3. **Locatii si Rezervari** - Pagina cu toate cafenelele retelei, carduri cu galerie automata de imagini, harti interactive Leaflet si sistem de rezervari cu selectare data/ora/numar persoane. Functionalitate unica de pre-comanda meniu direct din rezervare, disponibila in ziua sosirii.
-4. **Marketplace si Checkout** - Magazin online cu filtrare pe categorii, gestiune dinamica de stoc, cos de cumparaturi global (CartSidebar) si flux complet de checkout in 4 pasi (date livrare, curier, plata, confirmare).
-5. **Dashboard Admin** - Panou central cu statistici, management utilizatori/comenzi/inventar/vendori, adaugare locatii noi (cu coordonate GPS) si inbox pentru tichetele de suport ale furnizorilor.
-6. **Dashboard Vendor** - Panou dedicat furnizorilor pentru gestionarea propriului portofoliu de produse, vizualizare comenzi si comunicare cu administratorul prin sistem de tichete de suport.
-7. **Pagina de Contact** - Date comerciale complete, harta interactiva Leaflet full-width, formular de contact cu animatie de confirmare si linkuri Social Media. Datele de contact sunt editabile inline exclusiv de catre Administrator.
+Cele doua directii sunt unificate intr-o singura interfata coerenta, cu un sistem avansat de roluri (4 niveluri) si o experienta de utilizare premium bazata pe Glassmorphism, animatii Framer Motion si design complet responsiv.
 
 ---
 
-## Realizarea Cerintelor (Punctaj Laborator)
+## 2. Functionalitati Implementate
+
+1. **Autentificare si Gestionare Cont** — Sistem complet de Inregistrare, Autentificare si Editare Profil. Rolul utilizatorului este determinat automat dupa adresa de email. Starea de autentificare este persistata in localStorage (ramane activa dupa refresh).
+
+2. **Sistem de Roluri (4 niveluri complet izolate)**
+   - **Guest** — vizitator neautentificat, acces la toate paginile publice.
+   - **Client** — dashboard personal cu istoric rezervari/comenzi si puncte de loialitate, posibilitate de a scrie recenzii.
+   - **Vendor** — panou dedicat pentru gestionarea inventarului propriu, vizualizare comenzi si comunicare cu administratorul prin tichete de suport.
+   - **Administrator** — control total asupra platformei (utilizatori, comenzi, locatii, vendori, recenzii, date de contact).
+
+3. **Locatii si Rezervari** — Pagina cu toate cafenelele retelei, fiecare cu galerie automata de imagini, harta interactiva Leaflet cu localizare exacta pe strada, recenzii si orar. Sistemul de rezervari permite selectarea datei, orei (6 sloturi) si numarului de persoane, cu locuri disponibile afisate in timp real. Functionalitate unica: pre-comanda meniu direct din rezervare, activa exclusiv in ziua sosirii.
+
+4. **Marketplace si Checkout** — Magazin online cu filtrare pe categorii (Cafea Boabe, Echipamente, Accesorii, Patiserie), gestiune dinamica de stoc si pagini individuale per produs cu recenzii. Cos de cumparaturi global (CartSidebar) persistent pe toate paginile. Flux de checkout in 4 pasi: date livrare, alegere curier, metoda de plata (card cu animatie flip 3D sau ramburs), confirmare comanda.
+
+5. **Dashboard Administrator (`/admin`)** — Panou central cu 6 sectiuni: Overview cu statistici live, Management Utilizatori (adaugare/stergere conturi inclusiv vendor), Management Comenzi cu filtrare si actualizare status, Inventar & Vendori, Adaugare Date noi (locatii cu coordonate GPS, vendori, produse) si Inbox Vendori (tichete de suport). Editare contextuala: butoanele de editare apar direct pe paginile publice de Locatii si Contact, vizibile exclusiv pentru Admin.
+
+6. **Dashboard Vendor (`/vendor`)** — Panou dedicat cu 4 sectiuni: Overview cu statistici proprii si cereri de reaprovizionare, Inventar cu adaugare/editare/stergere produse proprii, Comenzi in care apar produsele furnizorului si Suport (trimitere tichete catre Administrator).
+
+7. **Pagina de Contact** — Date comerciale complete (adresa, telefon, email, program), harta interactiva Leaflet full-width cu toate locatiile retelei, formular de contact cu animatie de confirmare si linkuri Social Media. Datele comerciale sunt editabile inline exclusiv de catre Administrator.
+
+8. **Galerie de Imagini** — Carusel automat (ImageCarousel) cu auto-slide la 3 secunde, controale manuale (sageti + puncte indicatoare) si reset timer la interactiune manuala. Prezent pe paginile de Locatii si Produse.
+
+---
+
+## 3. Realizarea Cerintelor (Punctaj Laborator)
 
 | Cerinta | Punctaj | Implementare |
 |---|---|---|
-| Module autentificare si creare/editare cont | 1p | `AuthPage.tsx` (login + register), `ProfilePage.tsx` (dashboard client), `AdminDashboard.tsx` (management conturi) |
-| Pagina de start | 1p | `Home.tsx` cu Hero Section, carusel locatii, harta globala si call-to-action-uri |
+| Autentificare si creare/editare cont | 1p | `AuthPage.tsx` (login + register cu design split-screen animat), `ProfilePage.tsx` (dashboard client), `AdminDashboard.tsx` sectiunea Utilizatori |
+| Pagina de start | 1p | `Home.tsx` cu Hero Section full-screen, carusel interactiv de locatii, harta globala Leaflet cu toti pinii retelei si call-to-action-uri |
 | Pagina principala specifica aplicatiei | 1p | `LocationsPage.tsx`, `MarketplacePage.tsx`, `MenuPage.tsx`, `ReservationPage.tsx` |
-| Pagina de administrare | 1p | `AdminDashboard.tsx` cu 6 sectiuni + `AdminLocationEditor.tsx` |
-| Pagina de contact | 1p | `ContactPage.tsx` cu formular, harta Leaflet, date complete si editare inline Admin |
-| Galerie de imagini | 1p | `ImageCarousel` cu auto-slide la 3 secunde si controale manuale (sageti + puncte) |
-| Design responsiv | 1p | Breakpoints Tailwind (sm/md/lg), Navbar hamburger, FAB + Drawer pe mobil |
-| Calitatea design-ului | 1p | Paleta custom (coffee + gold + cream), Google Fonts, Framer Motion, Glassmorphism |
-| Elemente de originalitate | 1p | **Arhitectura hibridă unică** — îmbinarea unui lanț de cafenele fizice cu un Marketplace online susținut de vendori externi, într-un ecosistem digital unitar. **Pre-comandă la rezervare** — flux logic personalizat prin care utilizatorii pot adăuga produse din meniu direct la o rezervare existentă, disponibil exclusiv în ziua sosirii, cu modificare cantități în timp real. **4 niveluri de roluri complet izolate** — Guest, Client, Vendor și Admin, fiecare cu interfețe, dashboard-uri și permisiuni distincte, fără suprapunere. **Program de fidelizare integrat** — puncte de loialitate calculate și alocate automat la fiecare comandă finalizată. **Inbox intern Admin–Vendor** — sistem de tichete de suport direct în aplicație, facilitând comunicarea exclusivă între furnizori și administrator. **Imagini default dinamice per categorie** — algoritm care asignează automat o fotografie reprezentativă atunci când un produs sau o locație este adăugată fără imagine. **Editare contextuală Admin** — câmpurile de date comerciale din `/contact` și butoanele de editare de pe paginile de locații devin vizibile și funcționale exclusiv pentru utilizatorul cu rol Admin, fără pagini separate de editare. **Sistem restrictiv de recenzii** — logică care permite o singură recenzie per locație vizitată sau produs comandat; după publicare, formularul este înlocuit automat cu recenzia existentă. **Integrare geospațială open-source** — utilizarea Leaflet + OpenStreetMap în locul soluțiilor comerciale, cu hărți interactive pe Contact, Locații și Home. |
+| Pagina de administrare | 1p | `AdminDashboard.tsx` cu 6 sectiuni complete + `AdminLocationEditor.tsx` pentru editare detaliata per locatie |
+| Pagina de contact | 1p | `ContactPage.tsx` cu formular, harta Leaflet full-width, date comerciale complete si editare inline pentru Administrator |
+| Galerie de imagini | 1p | `ImageCarousel` cu auto-slide la exact 3 secunde, sageti de navigare manuala si puncte indicatoare; timer resetat la interactiune |
+| Design responsiv | 1p | Breakpoints Tailwind (sm/md/lg), Navbar hamburger pe mobil, grid-uri adaptive, FAB + Drawer pe ecrane mici, tabele inlocuite cu carduri pe mobil |
+| Calitatea design-ului | 1p | Paleta custom (coffee + gold + cream), Google Fonts, Framer Motion, Glassmorphism pe Navbar, design distinct per pagina dar consistent ca sistem vizual |
+| Elemente de originalitate | 1p | Arhitectura hibrida unica (retea fizica + marketplace intr-un ecosistem unitar). Pre-comanda la rezervare (flux personalizat cu modificare cantitati in timp real, activ exclusiv in ziua sosirii). 4 niveluri de roluri complet izolate cu interfete si permisiuni distincte. Program de fidelizare integrat (puncte alocate automat la fiecare comanda finalizata). Inbox intern Admin-Vendor (sistem de tichete de suport direct in aplicatie). Imagini default dinamice per categorie (algoritm de asignare automata la adaugarea unui produs/locatie fara fotografie). Editare contextuala Admin direct din interfata publica, fara pagini separate. Sistem restrictiv de recenzii (o singura recenzie per locatie/produs; formularul inlocuit automat cu recenzia existenta dupa publicare). Integrare geospatiala open-source cu Leaflet + OpenStreetMap. |
 | Documentatie Readme | 1p | Prezentul fisier |
 
 ---
 
-## Modalitati de Utilizare (4 Moduri Principale)
+## 4. Structura Proiectului (Sumar)
 
-1. **Guest (Vizitator)** - Acces la Homepage, Locatii, Meniu, Marketplace si Contact. Poate cumpara si rezerva mese fara cont.
-2. **Client (Utilizator Inregistrat)** - Dashboard personal cu istoric rezervari/comenzi, puncte de loialitate, recenzii si pre-comanda meniu in ziua rezervarii.
-3. **Vendor (Furnizor)** - VendorDashboard cu gestionare inventar propriu, vizualizare comenzi si tichete de suport catre Administrator.
-4. **Administrator** - AdminDashboard cu control total, editare locatii, moderare recenzii si gestionare furnizori.
+```
+Web_P/
+  frontend/
+    src/
+      App.tsx              # Configurarea tuturor rutelor
+      pages/               # Cate un fisier per pagina (15 pagini)
+      components/          # Navbar, CartSidebar, ImageCarousel, MapComponent
+      context/             # AuthContext.tsx (autentificare + cos + comenzi + rezervari + recenzii)
+      data/                # Mock data: locations.ts, menu.ts, adminData.ts, bookings.ts
+    Dockerfile
+    docker-compose.yml
+  documentatie_proiect.pdf
+```
 
 ---
 
-## Instructiuni de Instalare si Lansare
+## 5. Harta Rutelor Aplicatiei
+
+| Ruta | Componenta | Acces |
+|---|---|---|
+| `/` | `Home.tsx` | Public |
+| `/auth` | `AuthPage.tsx` | Public |
+| `/locations` | `LocationsPage.tsx` | Public |
+| `/reserve/:locationId` | `ReservationPage.tsx` | Public |
+| `/menu` | `MenuPage.tsx` | Public |
+| `/marketplace` | `MarketplacePage.tsx` | Public |
+| `/marketplace/product/:id` | `ProductPage.tsx` | Public |
+| `/checkout` | `CheckoutPage.tsx` | Public |
+| `/contact` | `ContactPage.tsx` | Public |
+| `/profile` | `ProfilePage.tsx` | Autentificat |
+| `/admin` | `AdminDashboard.tsx` | Admin |
+| `/admin/location/:id` | `AdminLocationEditor.tsx` | Admin |
+| `/vendor` | `VendorDashboard.tsx` | Vendor |
+| `/vendor/:vendorId` | `VendorPage.tsx` | Vendor / Admin |
+
+---
+
+## 6. Fluxurile Principale de Navigare
+
+**Flux 1 — Guest (fara cont):**
+`/` → `/locations` → `/menu` → `/marketplace` → `/checkout` → Confirmare
+Vizitatorul poate parcurge intregul flux de cumparare fara autentificare.
+
+**Flux 2 — Client inregistrat:**
+`/auth` (login) → `/profile` → `/reserve/:id` → Pre-comanda meniu in ziua rezervarii → Cumparare Marketplace → Scriere recenzii
+
+**Flux 3 — Vendor:**
+`/auth` (login vendor) → redirect automat `/vendor` → Overview / Inventar / Comenzi / Suport → Logout
+
+**Flux 4 — Administrator:**
+`/auth` (login admin) → redirect automat `/admin` → Overview / Utilizatori / Comenzi / Inventar / Adaugare Date / Inbox → Editare locatie din pagina publica → Editare date contact din `/contact` → Logout
+
+---
+
+## 7. Instructiuni de Instalare si Lansare
 
 ### Metoda 1: Docker Compose (Recomandata)
 > Cerinta: Docker Desktop instalat si pornit.
@@ -59,7 +124,8 @@ The Chic Roastery este o platforma web de tip Single Page Application care trans
 git clone <URL_REPOSITORY>
 cd Web_P/
 docker-compose up --build
-# Accesati: http://localhost:5173
+# Asteptati mesajul: Local: http://localhost:5173/
+# Accesati in browser: http://localhost:5173
 ```
 
 ### Metoda 2: Node.js local
@@ -70,36 +136,46 @@ git clone <URL_REPOSITORY>
 cd Web_P/frontend
 npm install
 npm run dev
-# Accesati: http://localhost:5173
+# Accesati in browser: http://localhost:5173
 ```
 
 ---
 
-## Conturi de Test
+## 8. Conturi de Test pentru Evaluare
 
-| Rol | Email | Redirect |
+| Rol | Email | Redirect automat |
 |---|---|---|
 | Administrator | `admin@chic.ro` | `/admin` |
 | Client | `alex@test.ro` | `/profile` |
-| Vendor 1 | `sage@coffee.ro` | `/vendor` (Sage Coffee) |
-| Vendor 2 | `symphony@coffee.ro` | `/vendor` (Symphony Coffee) |
-| Client nou | orice alt email valid | profil gol creat pe loc |
-| Guest | fara autentificare | navigare directa |
+| Vendor 1 | `sage@coffee.ro` | `/vendor` (produse Sage Coffee) |
+| Vendor 2 | `symphony@coffee.ro` | `/vendor` (produse Symphony Coffee) |
+| Client nou | orice alt email valid | `/profile` (profil gol creat pe loc) |
+| Guest | fara autentificare | navigare directa pe site |
 
-> **Nota:** Parola nu este validata in aceasta versiune — orice valoare este acceptata.
+> **Nota:** Parola nu este validata in aceasta versiune — orice valoare este acceptata. Rolul este determinat automat pe baza email-ului introdus.
 
 ---
 
-## Informatii Tehnice
+## 9. Probleme Cunoscute si Limitari
+
+**1. Harti Leaflet (React Leaflet)**
+Libraria React Leaflet poate prezenta comportamente minore cunoscute in ecosistemul open-source: tile-urile se pot incarca incomplet la prima randare, harta poate necesita un moment pentru re-randare la redimensionarea ferestrei, marcajele pot avea un offset minor pe anumite rezolutii. Acestea sunt probleme documentate ale librariei Leaflet.js (issues deschise pe GitHub-ul oficial) si nu afecteaza functionalitatea de baza — coordonatele GPS sunt corecte, marcajele indica locatiile reale, harta este complet interactiva (zoom, pan, click pe marker).
+
+**2. Simulare Frontend-Only**
+Aplicatia nu dispune de un backend real in aceasta versiune. Toate datele (utilizatori, produse, comenzi, rezervari) sunt simulate prin fisiere TypeScript statice si se reseteaza la refresh-ul complet al paginii. Datele persistate in localStorage (sesiune, cos) supravietuiesc refresh-ului. Intr-un mediu de productie, acestea ar fi stocate intr-o baza de date reala comunicand prin REST API.
+
+---
+
+## 10. Informatii Tehnice
 
 | | |
 |---|---|
-| **Arhitectura** | Single Page Application (SPA) - exclusiv frontend in aceasta versiune |
+| **Arhitectura** | Single Page Application (SPA) — exclusiv frontend in aceasta versiune |
 | **Framework** | React 18 + TypeScript + Vite |
-| **Rutare** | React Router Dom v6 cu rute protejate per rol |
-| **Styling** | Tailwind CSS (paleta custom) + Framer Motion |
+| **Rutare** | React Router Dom v6 (rute protejate per rol) |
+| **Styling** | Tailwind CSS (paleta custom) + Framer Motion (animatii) |
 | **Harti** | React Leaflet + OpenStreetMap (open-source, fara API key) |
 | **State Management** | React Context API (AuthContext + CartContext) + localStorage |
 | **Containerizare** | Docker + Docker Compose (node:22-alpine) |
 | **Date** | Mock data simulata prin fisiere TypeScript statice |
-| **Backend real** | Nu este implementat — datele se reseteaza la refresh complet |
+| **Backend real** | Nu este implementat in aceasta versiune |
