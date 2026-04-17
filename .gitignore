@@ -39,8 +39,9 @@ logs
 coverage/
 
 # Temporary exclusions (Documentation & READMEs)
-
 documentatie_proiect.docx
+documentatie_frontend.txt
+documentatie_proiect.md
 prezentare_proiect.txt
 frontend/Documentatie_Frontend.txt
 frontend/README.txt
